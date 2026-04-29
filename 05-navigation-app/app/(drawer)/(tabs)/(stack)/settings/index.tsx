@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 
 const SettingsScreen = () => {
     return (
-        <View>
-            <Text>SettingsScreen</Text>
+        <View className='flex items-center'>
+            <Text className='font-work-black text-2xl'>SettingsScreen</Text>
         </View>
     );
 };

@@ -1,5 +1,6 @@
 import { useFonts } from 'expo-font';
 import { Slot, SplashScreen } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import "./global.css";
 
@@ -22,7 +23,15 @@ const RootLayout = () => {
 
   if (!fontsLoaded && !error) return null;
 
-  return <Slot />; // Permite renderizar contenido sin opciones de navegación
+  return (
+    <>
+      <StatusBar
+        style="dark"
+        hidden={false}
+      />
+      <Slot />
+    </>
+  );
 };
 
 export default RootLayout;

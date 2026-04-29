@@ -1,10 +1,18 @@
 import CustomButton from '@/components/shared/CustomButton';
-import { Link, router } from 'expo-router';
+import { DrawerActions } from '@react-navigation/native';
+import { Link, router, useNavigation } from 'expo-router';
 import React from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
+
+    const navigation = useNavigation();
+
+    const onToggleDrawer = () => {
+        navigation.dispatch(DrawerActions.toggleDrawer);
+    };
+
     return (
         <SafeAreaView>
             <View className='px-10'>
@@ -38,11 +46,18 @@ const ProfileScreen = () => {
                         className='mb-10'
                         color='primary'
                         variant='text-only'
-                        onPress={() => router.push('/products')}
                     >
                         Productos 2
                     </CustomButton>
                 </Link>
+
+                <CustomButton
+                    className='mb-2'
+                    color='primary'
+                    onPress={onToggleDrawer}
+                >
+                    Abrir menú
+                </CustomButton>
 
             </View>
         </SafeAreaView >

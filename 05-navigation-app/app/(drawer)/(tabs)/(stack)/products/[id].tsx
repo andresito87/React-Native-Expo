@@ -14,7 +14,7 @@ const ProductScreen = () => {
 
         navigation.setOptions({
 
-            title: product?.title,
+            title: product?.title ?? 'Producto',
 
         });
 
