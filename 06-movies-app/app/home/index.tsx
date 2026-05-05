@@ -29,21 +29,24 @@ const HomeScreen = () => {
                 <MovieHorizontalList
                     className='mb-5'
                     title='Populares'
-                    movies={popularQuery.data ?? []}
+                    movies={popularQuery.data?.pages.flat() ?? []}
+                    loadNextPage={popularQuery.fetchNextPage}
                 />
 
                 {/* Mejor valoradas */}
                 <MovieHorizontalList
                     className='mb-5'
                     title='Mejor valoradas'
-                    movies={topRatedQuery.data ?? []}
+                    movies={topRatedQuery.data?.pages.flat() ?? []}
+                    loadNextPage={topRatedQuery.fetchNextPage}
                 />
 
                 {/* Próximos estrenos */}
                 <MovieHorizontalList
                     className='mb-5'
                     title='Próximos estrenos'
-                    movies={upcomingQuery.data ?? []}
+                    movies={upcomingQuery.data?.pages.flat() ?? []}
+                    loadNextPage={upcomingQuery.fetchNextPage}
                 />
             </View>
         </ScrollView>
