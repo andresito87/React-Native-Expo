@@ -1,24 +1,36 @@
 import { Formatter } from '@/config/helpers/formatter';
 import { CompleteMovie } from '@/infrastructure/interfaces/movie.interface';
+import AppText from '@/presentation/components/ui/AppText';
+import { useAppTheme } from '@/presentation/theme/useAppTheme';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 interface Props {
     movie: CompleteMovie;
 }
 
 const MovieDescription = ({ movie }: Props) => {
+    const { colors } = useAppTheme();
+
     return (
-        <View className='mx-5'>
-            <View className='flex flex-row'>
-                <Text>{movie.rating}</Text>
-                <Text>{movie.genres.join(', ')}</Text>
+        <View
+            className='mx-5 mt-3 p-4 rounded-2xl'
+            style={{
+                backgroundColor: colors.surface,
+                borderColor: colors.border,
+                borderWidth: 1,
+            }}
+        >
+            <View className='flex flex-row items-center gap-2'>
+                <AppText>⭐ {movie.rating.toFixed(1)}</AppText>
+                <AppText muted>•</AppText>
+                <AppText muted>{movie.genres.join(', ')}</AppText>
             </View>
 
-            <Text className='font-bold mt-5'>Historia</Text>
-            <Text className='font-normal mt-2'>{movie.description}</Text>
+            <AppText variant='subtitle' style={{ marginTop: 16 }}>Historia</AppText>
+            <AppText style={{ marginTop: 8 }}>{movie.description}</AppText>
 
-            <Text className='font-bold mt-2 text-2xl'>{Formatter.currency(movie.budget)}</Text>
+            <AppText variant='subtitle' style={{ marginTop: 18 }}>{Formatter.currency(movie.budget)}</AppText>
         </View>
     );
 };

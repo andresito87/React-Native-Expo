@@ -1,26 +1,30 @@
 import MainSlideshow from '@/presentation/components/movies/MainSlideshow';
 import MovieHorizontalList from '@/presentation/components/movies/MovieHorizontalList';
+import AppScreen from '@/presentation/components/ui/AppScreen';
+import AppText from '@/presentation/components/ui/AppText';
 import { useMovies } from '@/presentation/hooks/useMovies';
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAppTheme } from '@/presentation/theme/useAppTheme';
+import { ActivityIndicator, View } from 'react-native';
 
 const HomeScreen = () => {
 
-    const safeArea = useSafeAreaInsets();
+    const { colors } = useAppTheme();
     const { nowPlayingQuery, popularQuery, topRatedQuery, upcomingQuery } = useMovies();
 
     if (nowPlayingQuery.isLoading) {
         return (
-            <View className='justify-center items-center flex-1'>
-                <ActivityIndicator color='purple' size={40} />
-            </View>
+            <AppScreen>
+                <View className='justify-center items-center flex-1'>
+                    <ActivityIndicator color={colors.primary} size={40} />
+                </View>
+            </AppScreen>
         );
     }
 
     return (
-        <ScrollView>
-            <View className='mt-2 pb-10' style={{ paddingTop: safeArea.top }}>
-                <Text className='text-3xl font-bold px-4'>Movies App</Text>
+        <AppScreen scroll>
+            <View className='mt-2 pb-10'>
+                <AppText variant='title' style={{ paddingHorizontal: 16, marginBottom: 4 }}>Movies App</AppText>
 
                 {/* Carousel de imágenes */}
                 <MainSlideshow movies={nowPlayingQuery.data ?? []} />
@@ -49,7 +53,7 @@ const HomeScreen = () => {
                     loadNextPage={upcomingQuery.fetchNextPage}
                 />
             </View>
-        </ScrollView>
+        </AppScreen>
     );
 };
 

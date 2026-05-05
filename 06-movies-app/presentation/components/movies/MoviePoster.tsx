@@ -1,15 +1,23 @@
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, Pressable } from 'react-native';
+import { useAppTheme } from '@/presentation/theme/useAppTheme';
 
 interface Props {
     id: number;
     poster: string;
     smallPoster?: boolean;
     className?: string;
+    width?: number;
+    height?: number;
 }
 
-const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
+const MoviePoster = ({ id, poster, smallPoster = false, className, width, height }: Props) => {
+    const { colors } = useAppTheme();
+
+    const posterWidth = width ?? (smallPoster ? 85 : 150);
+    const posterHeight = height ?? (smallPoster ? 130 : 250);
+
     return (
         <Pressable
             className={`active:opacity-90 px-2 ${className}`}
@@ -17,10 +25,12 @@ const MoviePoster = ({ id, poster, smallPoster = false, className }: Props) => {
         >
             <Image
                 source={{ uri: poster }}
-                className='shadow-lg rounded-2xl w-full h-full'
+                className='rounded-2xl w-full h-full'
                 style={{
-                    width: smallPoster ? 85 : 150,
-                    height: smallPoster ? 130 : 250
+                    width: posterWidth,
+                    height: posterHeight,
+                    borderWidth: 1,
+                    borderColor: colors.border,
                 }}
                 resizeMode='cover'
             />

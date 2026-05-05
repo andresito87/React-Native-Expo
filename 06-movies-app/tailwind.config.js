@@ -6,7 +6,17 @@ module.exports = {
   ],
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          500: '#6D28D9',
+          400: '#9B87F5',
+        },
+      },
+      borderRadius: {
+        app: '16px',
+      },
+    },
   },
   plugins: [],
 }

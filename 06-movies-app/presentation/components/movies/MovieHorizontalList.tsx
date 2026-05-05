@@ -1,6 +1,8 @@
 import { Movie } from '@/infrastructure/interfaces/movie.interface';
+import AppText from '@/presentation/components/ui/AppText';
+import { designTokens } from '@/presentation/theme/tokens';
 import React, { useEffect, useRef } from 'react';
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, Text, View } from 'react-native';
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent, View } from 'react-native';
 import MoviePoster from './MoviePoster';
 
 interface Props {
@@ -41,17 +43,23 @@ const MovieHorizontalList = ({ className, title, movies, loadNextPage }: Props) 
 
     return (
         <View className={`${className}`}>
-            {title && <Text className={`text-2xl font-bold px-4 mb-2`}>{title}</Text>}
+            {title && (
+                <AppText variant='subtitle' style={{ paddingHorizontal: 16, marginBottom: designTokens.spacing.md }}>
+                    {title}
+                </AppText>
+            )}
 
             <FlatList
                 horizontal
                 data={movies}
                 keyExtractor={(item, i) => `${item.id}-${i}`}
                 showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: 8 }}
                 renderItem={({ item }) => (
                     <MoviePoster id={item.id} poster={item.poster} smallPoster />
                 )}
                 onScroll={onScroll}
+                scrollEventThrottle={16}
             />
 
         </View>

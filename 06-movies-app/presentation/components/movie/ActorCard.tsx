@@ -1,28 +1,33 @@
 import { Cast } from '@/infrastructure/interfaces/cast.interface';
-import { Image, Text, View } from 'react-native';
+import AppText from '@/presentation/components/ui/AppText';
+import { useAppTheme } from '@/presentation/theme/useAppTheme';
+import { Image, View } from 'react-native';
 
 interface Props {
     actor: Cast;
 }
 
 export const ActorCard = ({ actor }: Props) => {
+    const { colors } = useAppTheme();
+
     return (
-        <View className="mx-10 w-[60px]">
+        <View className="mx-5 w-[100px]">
             <Image
                 source={{ uri: actor.avatar }}
-                className="w-[100px] h-[150] rounded-2xl shadow"
+                className="w-[100px] h-[150px] rounded-2xl"
+                style={{ borderWidth: 1, borderColor: colors.border }}
                 resizeMode="cover"
             />
 
-            <View>
-                <Text
+            <View className='mt-2'>
+                <AppText
                     numberOfLines={2}
                     adjustsFontSizeToFit
-                    className="font-bold text-lg"
+                    style={{ fontWeight: '700', lineHeight: 18 }}
                 >
                     {actor.name}
-                </Text>
-                <Text className="text-gray-600 text-xs">{actor.character}</Text>
+                </AppText>
+                <AppText variant='caption' muted>{actor.character}</AppText>
             </View>
         </View>
     );

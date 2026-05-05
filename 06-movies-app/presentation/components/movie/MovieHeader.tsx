@@ -2,7 +2,10 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, Pressable, Text, useWindowDimensions, View } from 'react-native';
+import { Image, Pressable, useWindowDimensions, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAppTheme } from '@/presentation/theme/useAppTheme';
+import AppText from '@/presentation/components/ui/AppText';
 
 interface Props {
     poster: string;
@@ -13,12 +16,14 @@ interface Props {
 const MovieHeader = ({ poster, originalTile, title }: Props) => {
 
     const { height: screenHeight } = useWindowDimensions();
+    const insets = useSafeAreaInsets();
+    const { colors } = useAppTheme();
 
     return (
         <>
             {/* Fondo gradiente */}
             <LinearGradient
-                colors={['rgba(0,0,0,0.3)', 'transparent']}
+                colors={[colors.overlay, 'transparent']}
                 start={[0, 0]}
                 style={{
                     height: screenHeight * 0.4,
@@ -34,16 +39,24 @@ const MovieHeader = ({ poster, originalTile, title }: Props) => {
                     position: 'absolute',
                     zIndex: 99,
                     elevation: 9,
-                    top: 40,
-                    left: 10
+                    top: insets.top + 8,
+                    left: 12
                 }}
             >
-                <Pressable onPress={() => router.dismiss()}>
+                <Pressable
+                    onPress={() => router.dismiss()}
+                    style={{
+                        backgroundColor: colors.surfaceMuted,
+                        borderRadius: 999,
+                        padding: 8,
+                        borderWidth: 1,
+                        borderColor: colors.border,
+                    }}
+                >
                     <Ionicons
                         name='arrow-back'
-                        size={30}
-                        color='white'
-                        className='shadow'
+                        size={24}
+                        color={colors.text}
                     />
                 </Pressable>
             </View>
@@ -64,8 +77,8 @@ const MovieHeader = ({ poster, originalTile, title }: Props) => {
 
             {/* Info de la película */}
             <View className='px-5 mt-5'>
-                <Text className='font-normal'>{originalTile}</Text>
-                <Text className='font-semibold text-2xl'>{title}</Text>
+                <AppText muted>{originalTile}</AppText>
+                <AppText variant='subtitle'>{title}</AppText>
             </View>
         </>
     );
