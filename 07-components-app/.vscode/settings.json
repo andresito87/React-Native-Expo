@@ -3,5 +3,25 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
-  }
+  },
+  "colorize.languages": [
+    "css",
+    "scss",
+    "less",
+    "xml",
+    "svg",
+    "typescript",
+    "typescriptreact"
+  ],
+  "colorize.enable_search_variables": true,
+  "colorize.include": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.less",
+    "**/*.styl",
+    "**/*.qss",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
