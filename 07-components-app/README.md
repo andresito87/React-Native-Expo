@@ -1,50 +1,216 @@
-# Welcome to your Expo app 👋
+# Components App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native mobile application built with Expo.
 
-## Get started
+This project uses Expo with a **custom development build** as the recommended development workflow. This approach provides a native app experience during development and avoids the limitations of Expo Go when testing platform-specific behavior.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Requirements
 
-2. Start the app
+Before running the project, make sure you have the following tools installed:
 
-   ```bash
-   npx expo start
-   ```
+- Node.js
+- npm
+- Expo CLI
+- Android Studio for Android development
+- Xcode for iOS development
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Install the project dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## Recommended Development Workflow
 
-To learn more about developing your project with Expo, look at the following resources:
+This project should be developed using a **development build** instead of Expo Go.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+A development build allows you to run the real native version of the app on an emulator, simulator, or physical device while still using Metro for fast refresh and JavaScript updates.
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## Create and Install a Development Build
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Android
+
+```bash
+npx expo run:android
+```
+
+This command compiles and installs the native Android app on an emulator or connected physical device.
+
+### iOS
+
+```bash
+npx expo run:ios
+```
+
+This command compiles and installs the native iOS app on the simulator or a connected device.
+
+---
+
+## Start the Development Server
+
+After installing the development build, start Metro with:
+
+```bash
+npx expo start --dev-client
+```
+
+Then open the installed app on your emulator, simulator, or physical device.
+
+This is the recommended command for day-to-day development.
+
+---
+
+## Why Use a Development Build?
+
+Expo Go is useful for quick experiments, but it does not always behave the same as the final native app.
+
+Some features may behave differently in Expo Go, especially:
+
+- Keyboard behavior
+- Safe areas
+- Native permissions
+- Native libraries
+- Expo config plugins
+- Android and iOS native configuration
+- Gestures
+- Splash screen
+- App icons
+- Device-specific behavior
+
+A development build uses the actual native configuration of this project, including:
+
+- `app.json`
+- Expo plugins
+- Native Android and iOS settings
+- Installed native dependencies
+- Real keyboard behavior
+- Native permissions
+- Native assets
+
+For that reason, a development build provides a more accurate environment for testing the app on real devices.
+
+---
+
+## When Do You Need to Rebuild?
+
+You do not need to rebuild the native app after every code change.
+
+### Rebuild is not required when changing
+
+- React components
+- Screens
+- Hooks
+- State logic
+- Forms
+- Styles
+- NativeWind or Tailwind classes
+- JavaScript or TypeScript logic
+- Text content
+- JavaScript-based navigation
+- Services written in JavaScript or TypeScript
+
+For these changes, keep Metro running with:
+
+```bash
+npx expo start --dev-client
+```
+
+---
+
+### Rebuild is required when changing
+
+- `app.json`
+- `app.config.ts`
+- Expo plugins
+- Native permissions
+- Native app icons
+- Splash screen configuration
+- Android native configuration
+- iOS native configuration
+- Files inside the `android/` directory
+- Files inside the `ios/` directory
+- Libraries that include native code
+
+For example, after changing a native Android option such as:
+
+```json
+{
+  "expo": {
+    "android": {
+      "softwareKeyboardLayoutMode": "resize"
+    }
+  }
+}
+```
+
+You need to rebuild the Android app:
+
+```bash
+npx expo run:android
+```
+
+---
+
+## Common Commands
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start Metro for the development build:
+
+```bash
+npx expo start --dev-client
+```
+
+Build and install the Android app:
+
+```bash
+npx expo run:android
+```
+
+Build and install the iOS app:
+
+```bash
+npx expo run:ios
+```
+
+Start Expo normally:
+
+```bash
+npx expo start
+```
+
+The standard Expo start command may open the app in Expo Go. For this project, `npx expo start --dev-client` is preferred because it runs the installed native development build.
+
+---
+
+## Project Structure
+
+This project uses Expo Router and file-based routing.
+
+The main application code is located inside the `app` directory.
+
+```txt
+app/
+  _layout.tsx
+  index.tsx
+```
+
+Shared UI components, hooks, services, and other application code should be organized according to the project architecture.
+
+---
+
+## Notes
+
+For reliable testing, especially when working with keyboard behavior, native permissions, device features, or platform-specific UI, always test using the installed development build on an emulator or physical device.
+
+Expo Go should only be used for quick experiments and simple prototypes.
