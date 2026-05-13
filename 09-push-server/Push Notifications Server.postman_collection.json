@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "e8ae6458-a51c-4781-9254-d7566ceafa5a",
+    "name": "Push Notifications Server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19407551"
+  },
+  "item": [
+    {
+      "name": "Send Notification",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"to\":[\"ExponentPushToken[7wTYFhGGcepA9vHjTYVVAr]\"]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "localhost:3000/api/send-notification",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "send-notification"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
