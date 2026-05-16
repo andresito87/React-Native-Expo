@@ -1,10 +1,14 @@
-import { Text, View } from 'react-native';
+import { ThemedText } from '@/presentation/components/shared/ThemedText';
+import { ThemedView } from '@/presentation/components/shared/ThemedView';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const LoadingScreen = () => {
     return (
-        <View>
-            <Text>LoadingScreen</Text>
-        </View>
+        <ThemedView>
+            <SafeAreaView>
+                <ThemedText>LoadingScreen</ThemedText>
+            </SafeAreaView>
+        </ThemedView>
     );
 };
 

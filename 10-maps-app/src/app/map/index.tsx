@@ -1,10 +1,14 @@
-import { Text, View } from 'react-native';
+import { ThemedText } from '@/presentation/components/shared/ThemedText';
+import { ThemedView } from '@/presentation/components/shared/ThemedView';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const MapScreen = () => {
     return (
-        <View>
-            <Text>MapScreen</Text>
-        </View>
+        <ThemedView>
+            <SafeAreaView>
+                <ThemedText>MapScreen</ThemedText>
+            </SafeAreaView>
+        </ThemedView>
     );
 };
 
