@@ -41,5 +41,6 @@ app-example
 # generated native folders
 /ios
 /android
-# Local Pi runtime state
-.atl/
+
+# Enviroments
+.env

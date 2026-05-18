@@ -1,7 +1,7 @@
 import ThemedPressable from '@/presentation/components/shared/ThemedPressable';
 import { ThemedText } from '@/presentation/components/shared/ThemedText';
 import { ThemedView } from '@/presentation/components/shared/ThemedView';
-import { usePermissionsStore } from '@/presentation/store/usePermissions';
+import { usePermissionsStore } from '@/presentation/store/usePermissionsStore';
 
 const PermissionsScreen = () => {
 

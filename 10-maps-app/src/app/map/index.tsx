@@ -1,14 +1,40 @@
-import { ThemedText } from '@/presentation/components/shared/ThemedText';
-import { ThemedView } from '@/presentation/components/shared/ThemedView';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import CustomMap from '@/presentation/components/maps/CustomMap';
+import { useLocationStore } from '@/presentation/store/useLocationStore';
+import { useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 
 const MapScreen = () => {
+
+    const { lastKnownLocation, getLocation } = useLocationStore();
+
+    useEffect(() => {
+
+        if (lastKnownLocation === null) {
+            getLocation();
+        }
+
+    }, []);
+
+    if (lastKnownLocation === null) {
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <ActivityIndicator />
+            </View>
+        );
+    }
+
     return (
-        <ThemedView>
-            <SafeAreaView>
-                <ThemedText>MapScreen</ThemedText>
-            </SafeAreaView>
-        </ThemedView>
+        <View style={{ flex: 1 }}>
+            <CustomMap
+                initialLocation={lastKnownLocation}
+            />
+        </View>
     );
 };
 

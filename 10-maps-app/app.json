@@ -36,6 +36,13 @@
             "imageWidth": 76
           }
         }
+      ],
+      [
+        "react-native-maps",
+        {
+          "androidGoogleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY_ANDROID",
+          "iosGoogleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY_IOS"
+        }
       ]
     ],
     "experiments": {
